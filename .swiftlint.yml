@@ -1,0 +1,69 @@
+# SwiftLint Configuration for Compare Yourself
+
+# Paths to include - with proper spacing
+included:
+  - Compare Yourself
+  - Compare YourselfTests
+  - Compare YourselfUITests
+
+# Paths to ignore
+excluded:
+  - Pods
+  - Carthage
+  - .build
+  - DerivedData
+  - fastlane
+  - .swiftpm
+  - Compare Yourself.xcodeproj
+
+# Start with minimal disabled rules
+disabled_rules:
+  - trailing_whitespace
+
+# Basic opt-in rules
+opt_in_rules:
+  - empty_count
+  - empty_string
+  - contains_over_first_not_nil
+
+# Lenient settings to start
+line_length:
+  warning: 150
+  error: 200
+  ignores_comments: true
+  ignores_urls: true
+
+file_length:
+  warning: 500
+  error: 1000
+
+function_body_length:
+  warning: 50
+  error: 100
+
+cyclomatic_complexity:
+  warning: 15
+  error: 25
+
+identifier_name:
+  min_length:
+    warning: 1
+  max_length:
+    warning: 60
+  excluded:
+    - id
+    - x
+    - y
+    - db
+    - i
+    - j
+
+type_name:
+  min_length: 3
+  max_length: 50
+  allowed_symbols: "_"  # ← Allow underscores in type names
+
+trailing_newline: warning
+
+vertical_whitespace:
+  max_empty_lines: 2

@@ -9,7 +9,7 @@ import XCTest
 
 final class Compare_YourselfUITestsLaunchTests: XCTestCase {
 
-    override class var runsForEachTargetApplicationUIConfiguration: Bool {
+    override static var runsForEachTargetApplicationUIConfiguration: Bool {
         true
     }
 
