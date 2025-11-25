@@ -57,5 +57,8 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
+        .modelContainer(for: [
+            MeasurementPoint.self,
+            Measurement.self
+        ], inMemory: true)
 }
