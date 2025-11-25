@@ -10,11 +10,17 @@ import SwiftData
 
 @Model
 class MeasurementPoint {
+    var pointId = UUID()
     var name: String
     var measurements: [Measurement]
+    // Variable for placement on diagram0
+    var xPosition: Double?
+    var yPosition: Double?
+    var isActive: Bool
     
     init(name: String) {
         self.name = name
         self.measurements = []
+        self.isActive = true
     }
 }

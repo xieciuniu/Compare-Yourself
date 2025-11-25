@@ -10,6 +10,7 @@ import SwiftData
 
 @Model
 class Measurement {
+    var measurementId = UUID()
     var value: Double
     var unit: MeasurementUnit
     var notes: String?
