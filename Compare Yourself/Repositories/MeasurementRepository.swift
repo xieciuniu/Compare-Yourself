@@ -28,29 +28,7 @@ class MeasurementRepository: MeasurementRepositoryProtocol {
         return fetched
     }
     
-    func update(_ measurementId: UUID, value: Double? = nil, unit: MeasurementUnit? = nil, notes: String? = nil, date: Date? = nil, measurementPoint: MeasurementPoint? = nil) throws {
-        let fetchDescirptior = FetchDescriptor<Measurement>(
-            predicate: #Predicate { $0.measurementId == measurementId },
-            sortBy: [ .init(\Measurement.date) ]
-        )
-        if let measurement = try context.fetch(fetchDescirptior).first {
-            if let value {
-                measurement.value = value
-            }
-            if let unit {
-                measurement.unit = unit
-            }
-            if let notes {
-                measurement.notes = notes
-            }
-            if let date {
-                measurement.date = date
-            }
-            if let measurementPoint {
-                measurement.measurementPoint = measurementPoint
-            }
-        }
-        
+    func save() throws {
         try context.save()
     }
     

@@ -6,3 +6,13 @@
 //
 
 import Foundation
+
+@Observable
+class AddWeightViewModel {
+    var weight: Double = 0.0
+    var repository: MeasurementRepository
+    
+    init(repository: MeasurementRepository) {
+        self.repository = repository
+    }
+}

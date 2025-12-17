@@ -69,7 +69,8 @@ class MeasurementRepositoryTests {
         let measurement = Measurement(value: 0.0, unit: .length, date: Date(), measurementPoint: measurementPoint)
         try await repository.create(measurement)
         
-        try await repository.update(measurement.measurementId, value: 10.0)
+        measurement.value = 10.0
+        try await repository.save()
         let fetched = try await repository.getAll().first!
         
         #expect(fetched.value == 10.0)
