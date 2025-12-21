@@ -43,9 +43,25 @@ class MeasurementPointRepository: MeasurementPointRepositoryProtocol {
         return fetched
     }
     
-    func findByName(_ name: String) async throws -> MeasurementPoint? {
+    func getInactiveMeasurementPoints() async throws -> [MeasurementPoint] {
+        let fetchDescriptor = FetchDescriptor<MeasurementPoint>(
+            predicate: #Predicate { !$0.isActive }
+        )
+        let fetched = try context.fetch(fetchDescriptor)
+        return fetched
+    }
+    
+    func findByName(_ name: String) async throws -> [MeasurementPoint] {
         let fetchDescriptor = FetchDescriptor<MeasurementPoint>(
             predicate: #Predicate { $0.name == name }
+        )
+        let fetched = try context.fetch(fetchDescriptor)
+        return fetched
+    }
+    
+    func findById(_ id: UUID) async throws -> MeasurementPoint? {
+        let fetchDescriptor = FetchDescriptor<MeasurementPoint>(
+            predicate: #Predicate { $0.pointId == id }
         )
         let fetched = try context.fetch(fetchDescriptor).first
         return fetched
