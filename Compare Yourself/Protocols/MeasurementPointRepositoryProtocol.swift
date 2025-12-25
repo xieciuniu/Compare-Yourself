@@ -16,5 +16,7 @@ protocol MeasurementPointRepositoryProtocol {
     
     // Specific queries
     func getActiveMeasurementPoints() async throws -> [MeasurementPoint]
-    func findByName(_ name: String) async throws -> MeasurementPoint?
+    func getInactiveMeasurementPoints() async throws -> [MeasurementPoint]
+    func findByName(_ name: String) async throws -> [MeasurementPoint]
+    func findById(_ id: UUID) async throws -> MeasurementPoint?
 }
