@@ -8,13 +8,30 @@
 import SwiftUI
 
 struct AddWeightView: View {
+    @State var vm: AddWeightViewModel
     
+    init(vm: AddWeightViewModel) {
+        self.vm = vm
+    }
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Text(vm.weight.formatted())
+                .font(.title)
+            
+            HStack {
+                Button("Add kg") {
+                    vm.weight += 1
+                }
+                
+                Button("Take kg") {
+                    vm.weight -= 1
+                }
+            }
+        }
     }
 }
 
-#Preview {
-    AddWeightView()
-}
+//#Preview {
+//    AddWeightView()
+//}
