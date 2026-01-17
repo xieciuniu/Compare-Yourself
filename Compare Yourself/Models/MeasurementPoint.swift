@@ -17,10 +17,32 @@ class MeasurementPoint {
     var xPosition: Double?
     var yPosition: Double?
     var isActive: Bool
+    var measurementUnit: MeasurementUnit
     
-    init(name: String) {
+    init(name: String, measurementUnit: MeasurementUnit = .length) {
         self.name = name
         self.measurements = []
         self.isActive = true
+        self.measurementUnit = measurementUnit
+    }
+}
+
+
+enum MeasurementUnit: String, Codable, CaseIterable, Identifiable {
+    case length
+    case weight
+    case percentage
+    
+    var id: Self { self }
+    
+    var description: String {
+        switch self {
+        case .length:
+            return "Length"
+        case .weight:
+            return "Weight"
+        case .percentage:
+            return "%"
+        }
     }
 }

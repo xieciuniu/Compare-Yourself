@@ -9,9 +9,11 @@ import SwiftUI
 
 struct AddWeightView: View {
     @State var vm: AddWeightViewModel
+    private var measurementPoint: MeasurementPoint
     
-    init(vm: AddWeightViewModel) {
+    init(vm: AddWeightViewModel, measurementPoint: MeasurementPoint) {
         self.vm = vm
+        self.measurementPoint = measurementPoint
     }
     
     var body: some View {
@@ -20,12 +22,12 @@ struct AddWeightView: View {
                 .font(.title)
             
             HStack {
-                Button("Add kg") {
-                    vm.weight += 1
-                }
-                
                 Button("Take kg") {
                     vm.weight -= 1
+                }
+                
+                Button("Add kg") {
+                    vm.weight += 1
                 }
             }
         }

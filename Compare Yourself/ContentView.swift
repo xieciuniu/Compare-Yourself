@@ -14,17 +14,7 @@ struct ContentView: View {
     
     var body: some View {
         Group {
-            if let vm = addWeightViewModel {
-                AddWeightView(vm: vm)
-            } else {
-                ProgressView()
-            }
-        }
-        .onAppear {
-            if addWeightViewModel == nil {
-                let repository = MeasurementRepository(context: modelContext)
-                addWeightViewModel = AddWeightViewModel(repository: repository)
-            }
+            Text("Hello")
         }
     }
 }
