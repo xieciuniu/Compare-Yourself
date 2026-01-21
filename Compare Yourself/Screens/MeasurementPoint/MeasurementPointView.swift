@@ -36,6 +36,9 @@ struct MeasurementPointView: View {
                 measurementPoint: mp
             )
         }
+        .onAppear {
+            vm.fetchMeasurements(mpId: mp.pointId)
+        }
     }
 }
 
