@@ -36,6 +36,7 @@ struct AddMeasurementPointView: View {
                     }
                     dismiss()
                 }
+                .disabled(!vm.canSave)
             }
             .padding(16)
         }

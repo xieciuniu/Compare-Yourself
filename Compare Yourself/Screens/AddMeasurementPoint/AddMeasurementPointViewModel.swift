@@ -31,7 +31,7 @@ class AddMeasurementPointViewModel {
     // MARK: Validation
     // Nah, IDK if just making it disable would be good UX, it need to be also visible why it's turned off
     var canSave: Bool {
-        name.trimmingCharacters(in: .whitespaces).isEmpty
+        !name.trimmingCharacters(in: .whitespaces).isEmpty
     }
     
     // MARK: Actions
@@ -41,7 +41,6 @@ class AddMeasurementPointViewModel {
     }
     
     func saveMeasurementPoint() async -> Bool {
-        guard canSave else { return false }
         do {
             try await repository.create(createMeasurementPoint())
         } catch {

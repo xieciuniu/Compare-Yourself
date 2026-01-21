@@ -9,20 +9,21 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-    @Environment(\.modelContext) private var modelContext
-    @State private var addWeightViewModel: AddWeightViewModel?
+    @EnvironmentObject var container: DependencyContainer
     
     var body: some View {
         Group {
-            Text("Hello")
+            MeasurementPointListView(vm: container.makeMeasurementPointListViewModel())
         }
     }
 }
 
 #Preview {
+    let container = DependencyContainer()
     ContentView()
         .modelContainer(for: [
             MeasurementPoint.self,
             Measurement.self
         ], inMemory: true)
+        .environmentObject(container)
 }

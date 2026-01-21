@@ -7,9 +7,11 @@
 
 import Foundation
 import SwiftData
+import Combine
 
-final class DependencyContainer {
-    lazy var modelContext: ModelContext = {
+final class DependencyContainer: ObservableObject {
+    
+    private(set) lazy var modelContext: ModelContext = {
         let schema = Schema([
             MeasurementPoint.self,
             Measurement.self,
@@ -42,5 +44,13 @@ final class DependencyContainer {
     
     func makeAddMeasurementPointViewModel() -> AddMeasurementPointViewModel {
         AddMeasurementPointViewModel(repository: measurementPointRepository)
+    }
+    
+    func makeMeasurementPointViewModel() -> MeasurementPointViewModel {
+        MeasurementPointViewModel(measurementRepository: measurementRepository)
+    }
+    
+    func makeMeasurementPointListViewModel() -> MeasurementPointListViewModel {
+        MeasurementPointListViewModel(repository: measurementPointRepository)
     }
 }

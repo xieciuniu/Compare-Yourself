@@ -23,10 +23,12 @@ struct Compare_YourselfApp: App {
             fatalError("Could not create ModelContainer: \(error)")
         }
     }()
+    @StateObject private var container = DependencyContainer()
 
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(container)
         }
         .modelContainer(sharedModelContainer)
     }
