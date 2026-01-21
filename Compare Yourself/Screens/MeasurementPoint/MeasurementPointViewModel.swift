@@ -25,4 +25,6 @@ class MeasurementPointViewModel {
             print("Failed to fetch measurements: \(error)")
         }
     }
+    
+
 }

@@ -9,7 +9,6 @@ import SwiftUI
 
 struct MeasurementPointListView: View {
     @EnvironmentObject var container: DependencyContainer
-    
     @State private var vm: MeasurementPointListViewModel
     
     init(vm: MeasurementPointListViewModel) {
@@ -17,22 +16,17 @@ struct MeasurementPointListView: View {
     }
     
     var body: some View {
-        NavigationStack{
-            if !vm.isLoading{
-                ForEach(vm.measurementPoints) { point in
-                    NavigationLink {
-                        MeasurementPointView(vm: container.makeMeasurementPointViewModel(), mp: point)
-                    } label: {
-                        MeasurementPointListRowView(point: point)
-                    }
-                    Divider()
-                }
+        Group {
+            if vm.isLoading {
+                ProgressView("Loading...")
+            } else if vm.measurementPoints.isEmpty {
+                emptyStateView
             } else {
-                ProgressView()
-            }
-            Spacer()
-            Button("Add Measurement Point") {
-                vm.showingAddPoint.toggle()
+                measurementPointsList
+                Spacer()
+                Button("Add Measurement Point") {
+                    vm.showingAddPoint.toggle()
+                }
             }
         }
         .sheet(isPresented:
@@ -51,6 +45,44 @@ struct MeasurementPointListView: View {
             }
         })
     }
+    
+    
+    // MARK: Subviews
+    
+    var measurementPointsList: some View {
+        List {
+            ForEach(vm.measurementPoints) { point in
+                NavigationLink(value: point) {
+                    MeasurementPointListRowView(point: point)
+                }
+            }
+            .onDelete { index in
+                Task {
+                    await vm.deleteMeasurementPoint(at: index)
+                }
+            }
+        }
+        .navigationDestination(for: MeasurementPoint.self) { point in
+            MeasurementPointView(
+                vm: container.makeMeasurementPointViewModel(),
+                mp: point
+            )
+        }
+    }
+    
+    var emptyStateView: some View {
+        ContentUnavailableView {
+            Label("No Measurement Points", systemImage: "pin.slash")
+        } description: {
+            Text("Add your first measurement point to start tracking")
+        } actions: {
+            Button("Add Measurement Point") {
+                vm.showingAddPoint = true
+            }
+            .buttonStyle(.borderedProminent)
+        }
+    }
+    
 }
 
 #Preview {
@@ -64,12 +96,29 @@ struct MeasurementPointListRowView: View {
     
     var body: some View {
         HStack {
-            Text(point.name)
-                .font(.title)
+            VStack(alignment: .leading, spacing: 4) {
+                Text(point.name)
+                    .font(.headline)
+                
+                Text(point.measurementUnit.description)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+            
             Spacer()
-            Text(point.isActive.description)
+            
+            // Show measurement count or status
+            let count = point.measurements.count
+            if count > 0 {
+                Text("\(count)")
+                    .font(.caption)
+                    .foregroundStyle(.white)
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 4)
+                    .background(Color.blue)
+                    .clipShape(Capsule())
+            }
         }
-        .padding(.horizontal, 8)
-        .padding(.vertical, 12)
+        .padding(.vertical, 4)
     }
 }

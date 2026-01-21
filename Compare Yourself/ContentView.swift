@@ -13,7 +13,9 @@ struct ContentView: View {
     
     var body: some View {
         Group {
-            MeasurementPointListView(vm: container.makeMeasurementPointListViewModel())
+            NavigationStack {
+                MeasurementPointListView(vm: container.makeMeasurementPointListViewModel())
+            }
         }
     }
 }

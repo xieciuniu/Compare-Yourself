@@ -31,4 +31,15 @@ class MeasurementPointListViewModel {
         }
     }
     
+    func deleteMeasurementPoint(at offsets: IndexSet) async {
+        let measurementPointToDelete = measurementPoints[offsets.first!]
+        measurementPoints.removeAll(where: { $0.id == measurementPointToDelete.id })
+        do {
+            try await repository.delete(measurementPointToDelete)
+        } catch {
+            print("failed to delete measurement point \(error)")
+        }
+        
+    }
+    
 }
