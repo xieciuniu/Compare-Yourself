@@ -10,9 +10,11 @@ import Foundation
 @Observable
 class MeasurementPointListViewModel {
     private var repository: MeasurementPointRepository
+    private var measurementRepository: MeasurementRepository
     
-    init(repository: MeasurementPointRepository) {
+    init(repository: MeasurementPointRepository, measurementRepository: MeasurementRepository) {
         self.repository = repository
+        self.measurementRepository = measurementRepository
     }
     
     var measurementPoints: [MeasurementPoint] = []
@@ -31,15 +33,16 @@ class MeasurementPointListViewModel {
         }
     }
     
-    func deleteMeasurementPoint(at offsets: IndexSet) async {
-        let measurementPointToDelete = measurementPoints[offsets.first!]
-        measurementPoints.removeAll(where: { $0.id == measurementPointToDelete.id })
-        do {
-            try await repository.delete(measurementPointToDelete)
-        } catch {
-            print("failed to delete measurement point \(error)")
-        }
-        
-    }
     
+    // TODO: Fix delete measurement Point 
+    func deleteMeasurementPoint(at offsets: IndexSet) async {
+        do {
+            for index in offsets {
+                try await repository.delete(measurementPoints[index])
+            }
+            await fetchMeasurementPoints()
+        } catch {
+            print("Failed to delete measurement point: \(error)")
+        }  
+    }
 }

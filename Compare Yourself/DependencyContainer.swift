@@ -51,6 +51,6 @@ final class DependencyContainer: ObservableObject {
     }
     
     func makeMeasurementPointListViewModel() -> MeasurementPointListViewModel {
-        MeasurementPointListViewModel(repository: measurementPointRepository)
+        MeasurementPointListViewModel(repository: measurementPointRepository, measurementRepository: measurementRepository)
     }
 }

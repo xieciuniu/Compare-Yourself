@@ -44,6 +44,11 @@ struct MeasurementPointListView: View {
                 await vm.fetchMeasurementPoints()
             }
         })
+        .refreshable {
+            Task {
+                await vm.fetchMeasurementPoints()
+            }
+        }
     }
     
     
