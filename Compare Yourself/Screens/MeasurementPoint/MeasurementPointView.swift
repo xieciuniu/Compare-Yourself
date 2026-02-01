@@ -26,8 +26,13 @@ struct MeasurementPointView: View {
                     Text("Add your first measurement for this point")
                 }
             } else {
-                ForEach(vm.measurements.sorted(by: { $0.date > $1.date })) { measurement in
+                ForEach(vm.measurements) { measurement in
                     MeasurementRow(measurement: measurement)
+                }
+                .onDelete { index in
+                    Task {
+                        await vm.deleteMeasurement(at: index, mpId: mp.pointId)
+                    }
                 }
             }
         }

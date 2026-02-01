@@ -44,11 +44,6 @@ struct MeasurementPointListView: View {
                 await vm.fetchMeasurementPoints()
             }
         })
-        .refreshable {
-            Task {
-                await vm.fetchMeasurementPoints()
-            }
-        }
     }
     
     
@@ -111,7 +106,10 @@ struct MeasurementPointListRowView: View {
                 Text(point.name)
                     .font(.headline)
                 
-                Text(unit + " | " + point.dateOfLastUpdate.formatted())
+                HStack(spacing: 3) {
+                    Text(unit + " |")
+                    Text(point.dateOfLastUpdate, style: .date)
+                }
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
