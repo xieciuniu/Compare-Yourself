@@ -18,6 +18,7 @@ class MeasurementPoint {
     var xPosition: Double?
     var yPosition: Double?
     var isActive: Bool
+    @Relationship(deleteRule: .nullify)
     var measurementUnit: MeasurementUnit
     
     init(name: String, measurementUnit: MeasurementUnit = .length) {

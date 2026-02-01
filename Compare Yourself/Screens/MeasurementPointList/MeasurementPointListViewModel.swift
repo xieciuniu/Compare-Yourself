@@ -36,13 +36,17 @@ class MeasurementPointListViewModel {
     
     // TODO: Fix delete measurement Point 
     func deleteMeasurementPoint(at offsets: IndexSet) async {
+        let idsToDelete = offsets.map { measurementPoints[$0].pointId }
+        
         do {
-            for index in offsets {
-                try await repository.delete(measurementPoints[index])
+            for id in idsToDelete {
+                try await repository.deleteById(id)
             }
-            await fetchMeasurementPoints()
         } catch {
             print("Failed to delete measurement point: \(error)")
-        }  
+        }
+        Task {
+            await fetchMeasurementPoints()
+        }
     }
 }

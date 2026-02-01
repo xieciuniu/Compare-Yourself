@@ -35,6 +35,19 @@ class MeasurementPointRepository: MeasurementPointRepositoryProtocol {
         try context.save()
     }
     
+    func deleteById(_ id: UUID) async throws {
+        let fetchDescriptor = FetchDescriptor<MeasurementPoint>(
+            predicate: #Predicate { $0.pointId == id }
+        )
+        guard let pointToDelet = try context.fetch(fetchDescriptor).first else {
+            print("Point not found for deletion: \(id)")
+            return
+        }
+        
+        context.delete(pointToDelet)
+        try context.save()
+    }
+    
     func getActiveMeasurementPoints() async throws -> [MeasurementPoint] {
         let fetchDescriptor = FetchDescriptor<MeasurementPoint>(
             predicate: #Predicate { $0.isActive }

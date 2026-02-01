@@ -98,6 +98,12 @@ struct MeasurementPointListView: View {
 
 struct MeasurementPointListRowView: View {
     let point: MeasurementPoint
+    let unit: String
+    
+    init(point: MeasurementPoint) {
+        self.point = point
+        self.unit = point.measurementUnit.description
+    }
     
     var body: some View {
         HStack {
@@ -105,7 +111,7 @@ struct MeasurementPointListRowView: View {
                 Text(point.name)
                     .font(.headline)
                 
-                Text(point.measurementUnit.description)
+                Text(unit)
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
