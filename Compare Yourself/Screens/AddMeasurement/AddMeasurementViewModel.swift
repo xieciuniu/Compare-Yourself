@@ -48,6 +48,7 @@ class AddMeasurementViewModel {
         
         do {
             try repository.create(measurement)
+            mp.dateOfLastUpdate = Date()
         } catch {
             print("Failed to add measurement")
         }

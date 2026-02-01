@@ -31,10 +31,10 @@ class MeasurementPointListViewModel {
         } catch {
             print("failed to fetch measurement points \(error)")
         }
+        
+        measurementPoints.sort(by: { $0.dateOfLastUpdate > $1.dateOfLastUpdate })
     }
     
-    
-    // TODO: Fix delete measurement Point 
     func deleteMeasurementPoint(at offsets: IndexSet) async {
         let idsToDelete = offsets.map { measurementPoints[$0].pointId }
         

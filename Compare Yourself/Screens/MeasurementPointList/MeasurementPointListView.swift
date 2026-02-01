@@ -111,7 +111,7 @@ struct MeasurementPointListRowView: View {
                 Text(point.name)
                     .font(.headline)
                 
-                Text(unit)
+                Text(unit + " | " + point.dateOfLastUpdate.formatted())
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
