@@ -12,6 +12,7 @@ struct AddMeasurement: View {
     @State var vm: AddMeasurementViewModel
     private var measurementPoint: MeasurementPoint
     @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var container: DependencyContainer
     
     init(vm: AddMeasurementViewModel, measurementPoint: MeasurementPoint) {
         self.vm = vm
@@ -22,7 +23,11 @@ struct AddMeasurement: View {
         NavigationStack {
             VStack(spacing: 20) {
                 // Value picker
-                pickerSection
+                if container.userPreferences.measurementSystem == .imperial && measurementPoint.measurementUnit == .length {
+                    imperialPickerSection
+                } else {
+                    pickerSection
+                }
                 
                 // Notes section
                 notesSection
@@ -40,13 +45,14 @@ struct AddMeasurement: View {
                 
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Save") {
-                        vm.addMeasurement(mp: measurementPoint)
+                        
+                        vm.addMeasurement(mp: measurementPoint, measurementSystem: container.userPreferences.measurementSystem, measurementType: measurementPoint.measurementUnit)
                         dismiss()
                     }
                 }
             }
             .task {
-                await vm.setLastMeasurementValue(measurementPointId: measurementPoint.pointId)
+                await vm.setLastMeasurementValue(measurementPointId: measurementPoint.pointId, measurementSystem: container.userPreferences.measurementSystem, measurementType: measurementPoint.measurementUnit)
             }
         }
     }
@@ -63,26 +69,29 @@ struct AddMeasurement: View {
                 Picker(selection: $vm.hundredsDigit, label: Text("")) {
                     ForEach(0..<10) { index in
                         Text("\(index)").tag(index)
+                            .font(.title)
                     }
                 }
                 .pickerStyle(.wheel)
-                .frame(width: 60)
+                .frame(width: 80)
                 
                 Picker(selection: $vm.tensDigit, label: Text("")) {
                     ForEach(0..<10) { index in
                         Text("\(index)").tag(index)
+                            .font(.title)
                     }
                 }
                 .pickerStyle(.wheel)
-                .frame(width: 60)
+                .frame(width: 80)
                 
                 Picker(selection: $vm.onesDigit, label: Text("")) {
                     ForEach(0..<10) { index in
                         Text("\(index)").tag(index)
+                            .font(.title)
                     }
                 }
                 .pickerStyle(.wheel)
-                .frame(width: 60)
+                .frame(width: 80)
                 
                 Text(",")
                     .font(.title)
@@ -90,12 +99,59 @@ struct AddMeasurement: View {
                 Picker(selection: $vm.oneOfTensDigit, label: Text("")) {
                     ForEach(0..<10) { index in
                         Text("\(index)").tag(index)
+                            .font(.title)
                     }
                 }
                 .pickerStyle(.wheel)
-                .frame(width: 60)
+                .frame(width: 80)
                 
-                Text("cm")
+                Text(vm.metricUnit)
+                    .font(.title3)
+            }
+            .frame(height: 200)
+        }
+    }
+    private var imperialPickerSection: some View {
+        VStack(spacing: 8) {
+            Text(measurementPoint.name)
+                .font(.headline)
+                .foregroundStyle(.secondary)
+            
+            HStack(spacing: -10) {
+                Picker(selection: $vm.feetDigit, label: Text("")) {
+                    ForEach(0..<10) { index in
+                        Text("\(index)").tag(index)
+                            .font(.title)
+                    }
+                }
+                .pickerStyle(.wheel)
+                .frame(width: 80)
+                
+                Text("ft ")
+                    .font(.title3)
+                
+                Picker(selection: $vm.inchesOnesDigit, label: Text("")) {
+                    ForEach(0..<12) { index in
+                        Text("\(index)").tag(index)
+                            .font(.title)
+                    }
+                }
+                .pickerStyle(.wheel)
+                .frame(width: 80)
+                
+                Text(",")
+                    .font(.title)
+                
+                Picker(selection: $vm.inchesTenthDigit, label: Text("")) {
+                    ForEach(0..<10) { index in
+                        Text("\(index)").tag(index)
+                            .font(.title)
+                    }
+                }
+                .pickerStyle(.wheel)
+                .frame(width: 80)
+                
+                Text("in")
                     .font(.title3)
             }
             .frame(height: 200)

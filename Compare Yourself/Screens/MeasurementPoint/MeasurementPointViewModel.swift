@@ -15,6 +15,7 @@ class MeasurementPointViewModel {
         self.measurementRepository = measurementRepository
     }
     
+    var unitString = ""
     var measurements: [Measurement] = []
     var showingAddPoint: Bool = false
     
@@ -24,7 +25,7 @@ class MeasurementPointViewModel {
         } catch {
             print("Failed to fetch measurements: \(error)")
         }
-        
+
         measurements.sort(by: { $0.date > $1.date })
     }
     
@@ -40,6 +41,17 @@ class MeasurementPointViewModel {
         }
         Task {
             fetchMeasurements(mpId: mpId)
+        }
+    }
+    
+    func measurementUnitString(measurementSystem: MeasurementSystem, measurementUnit: MeasurementUnit) {
+        switch measurementUnit {
+        case .length:
+            unitString = measurementSystem == .metric ? "cm" : "ft"
+        case .weight:
+            unitString = measurementSystem == .metric ? "kg" : "lbs"
+        case .percentage:
+            unitString = "%"
         }
     }
 
