@@ -17,10 +17,13 @@ struct UnitConverter {
     }
     
     static func inchesToFeetAndInches(_ totalInches: Double) -> (feet: Int, inches: Double) {
-        return (Int(totalInches.rounded(.down)), totalInches.truncatingRemainder(dividingBy: 1))
+        let feet = Int(totalInches / 12)
+        let remainingInches = totalInches.truncatingRemainder(dividingBy: 12)
+        
+        return (feet, remainingInches)
     }
     
     static func feetAndInchesToTotalInches(feet: Int, inches: Double) -> Double {
-        return Double(feet) + inches
+        return Double(feet * 12) + inches
     }
 }
