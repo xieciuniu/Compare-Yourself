@@ -19,79 +19,100 @@ struct AddMeasurement: View {
     }
     
     var body: some View {
-        VStack {
+        NavigationStack {
+            VStack(spacing: 20) {
+                // Value picker
+                pickerSection
+                
+                // Notes section
+                notesSection
+                
+                Spacer()
+            }
+            .navigationTitle("Add Measurement")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") {
+                        dismiss()
+                    }
+                }
+                
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Save") {
+                        vm.addMeasurement(mp: measurementPoint)
+                        dismiss()
+                    }
+                }
+            }
+            .task {
+                await vm.setLastMeasurementValue(measurementPointId: measurementPoint.pointId)
+            }
+        }
+    }
+    
+    // MARK: - Sections
+    
+    private var pickerSection: some View {
+        VStack(spacing: 8) {
             Text(measurementPoint.name)
-                .font(Font.largeTitle.bold())
-                .padding(.top, 20)
+                .font(.headline)
+                .foregroundStyle(.secondary)
             
             HStack(spacing: -10) {
                 Picker(selection: $vm.hundredsDigit, label: Text("")) {
-                    ForEach(0 ..< 10) { index in
-                        Text("\(index)")
-                            .font(.title)
+                    ForEach(0..<10) { index in
+                        Text("\(index)").tag(index)
                     }
                 }
                 .pickerStyle(.wheel)
-                
-                Text("")
+                .frame(width: 60)
                 
                 Picker(selection: $vm.tensDigit, label: Text("")) {
-                    ForEach(0 ..< 10) { index in
-                        Text("\(index)")
-                            .font(.title)
+                    ForEach(0..<10) { index in
+                        Text("\(index)").tag(index)
                     }
                 }
                 .pickerStyle(.wheel)
-                
-                Text("")
+                .frame(width: 60)
                 
                 Picker(selection: $vm.onesDigit, label: Text("")) {
-                    ForEach(0 ..< 10) { index in
-                        Text("\(index)")
-                            .font(.title)
+                    ForEach(0..<10) { index in
+                        Text("\(index)").tag(index)
                     }
                 }
                 .pickerStyle(.wheel)
-
+                .frame(width: 60)
+                
                 Text(",")
                     .font(.title)
-
+                
                 Picker(selection: $vm.oneOfTensDigit, label: Text("")) {
-                    ForEach(0 ..< 10) { index in
-                        Text("\(index)")
-                            .font(.title)
+                    ForEach(0..<10) { index in
+                        Text("\(index)").tag(index)
                     }
                 }
                 .pickerStyle(.wheel)
+                .frame(width: 60)
                 
-                Text(" cm")
-                    .font(.title)
+                Text("cm")
+                    .font(.title3)
             }
             .frame(height: 200)
-            .padding(.horizontal, 20)
-            .padding(.vertical, -5)
-            
-            Section {
-                TextField("Notes", text: $vm.notes)
-            }
-            .frame(height: 100)
-            .padding(.horizontal, 20)
-            
-            List {
-                
-            }
-            
-            Spacer()
-            
-            Button("Save") {
-                vm.addMeasurement(mp: measurementPoint)
-                dismiss()
-            }
         }
-        .onAppear() {
-            Task {
-                await vm.setLastMeasurementValue(measurementPointId: measurementPoint.pointId)
-            }
+    }
+    
+    private var notesSection: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Notes (Optional)")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .padding(.horizontal)
+            
+            TextField("Add any notes...", text: $vm.notes, axis: .vertical)
+                .textFieldStyle(.roundedBorder)
+                .padding(.horizontal)
+                .lineLimit(3...6)
         }
     }
 }

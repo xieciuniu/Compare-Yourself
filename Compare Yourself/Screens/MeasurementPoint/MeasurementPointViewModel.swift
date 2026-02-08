@@ -24,5 +24,23 @@ class MeasurementPointViewModel {
         } catch {
             print("Failed to fetch measurements: \(error)")
         }
+        
+        measurements.sort(by: { $0.date > $1.date })
     }
+    
+    func deleteMeasurement(at offsets: IndexSet, mpId: UUID) async {
+        let measurementsToDelete = offsets.map { measurements[$0]}
+        
+        do {
+            for measurement in measurementsToDelete {
+                try measurementRepository.delete(measurement)
+            }
+        } catch {
+            print("Failed to delete measurement: \(error)")
+        }
+        Task {
+            fetchMeasurements(mpId: mpId)
+        }
+    }
+
 }

@@ -16,30 +16,28 @@ struct AddMeasurementPointView: View {
         self.vm = vm
     }
     var body: some View {
-        NavigationStack {
-            VStack {
-                TextField("Measurement point name", text: $vm.name)
-                    .padding(.bottom, 16)
-                
-                Picker("Measurement unit", selection: $vm.measurementUnit) {
-                    ForEach(MeasurementUnit.allCases) {
-                        Text($0.description).tag($0)
-                    }
+        VStack {
+            TextField("Measurement point name", text: $vm.name)
+                .padding(.bottom, 16)
+            
+            Picker("Measurement unit", selection: $vm.measurementUnit) {
+                ForEach(MeasurementUnit.allCases) {
+                    Text($0.description).tag($0)
                 }
-                .pickerStyle(.segmented)
-                
-                Spacer()
-                
-                Button("Save") {
-                    Task {
-                        await vm.saveMeasurementPoint()
-                    }
-                    dismiss()
-                }
-                .disabled(!vm.canSave)
             }
-            .padding(16)
+            .pickerStyle(.segmented)
+            
+            Spacer()
+            
+            Button("Save") {
+                Task {
+                    await vm.saveMeasurementPoint()
+                }
+                dismiss()
+            }
+            .disabled(!vm.canSave)
         }
+        .padding(16)
     }
 }
 

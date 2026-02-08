@@ -12,12 +12,15 @@ import SwiftData
 class MeasurementPoint {
     var pointId = UUID()
     var name: String
+    @Relationship(deleteRule: .cascade, inverse: \Measurement.measurementPoint)
     var measurements: [Measurement]
     // Variable for placement on diagram0
     var xPosition: Double?
     var yPosition: Double?
     var isActive: Bool
     var measurementUnit: MeasurementUnit
+    var dateOfCreation: Date = Date()
+    var dateOfLastUpdate: Date = Date()
     
     init(name: String, measurementUnit: MeasurementUnit = .length) {
         self.name = name

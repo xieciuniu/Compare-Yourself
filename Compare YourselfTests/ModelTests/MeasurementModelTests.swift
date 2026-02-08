@@ -81,14 +81,12 @@ final class MeasurementModelTests: XCTestCase {
         
         let measurement = Measurement(
             value: 35.5,
-            unit: .length,
             notes: "Morning measurement",
             date: testDate,
             measurementPoint: measurementPoint
         )
         
         XCTAssertEqual(measurement.value, 35.5, accuracy: 0.001)
-        XCTAssertEqual(measurement.unit, .length)
         XCTAssertEqual(measurement.notes, "Morning measurement")
         XCTAssertEqual(measurement.date, testDate)
         XCTAssertEqual(measurement.measurementPoint.name, "Arm")
@@ -100,13 +98,11 @@ final class MeasurementModelTests: XCTestCase {
         
         let measurement = Measurement(
             value: 55.2,
-            unit: .weight,
             date: testDate,
             measurementPoint: measurementPoint
         )
         
         XCTAssertEqual(measurement.value, 55.2, accuracy: 0.001)
-        XCTAssertEqual(measurement.unit, .weight)
         XCTAssertNil(measurement.notes)
         XCTAssertEqual(measurement.date, testDate)
         XCTAssertEqual(measurement.measurementPoint.name, "Thigh")
@@ -118,13 +114,11 @@ final class MeasurementModelTests: XCTestCase {
         let measurementPoint = MeasurementPoint(name: "Neck")
         let measurement1 = Measurement(
             value: 38.0,
-            unit: .length,
             date: Date(),
             measurementPoint: measurementPoint
         )
         let measurement2 = Measurement(
             value: 38.5,
-            unit: .length,
             date: Date().addingTimeInterval(86400), // Next day
             measurementPoint: measurementPoint
         )
@@ -152,7 +146,6 @@ final class MeasurementModelTests: XCTestCase {
         let measurementPoint = MeasurementPoint(name: "Calf")
         let measurement = Measurement(
             value: 32.5,
-            unit: .length,
             date: Date(),
             measurementPoint: measurementPoint
         )

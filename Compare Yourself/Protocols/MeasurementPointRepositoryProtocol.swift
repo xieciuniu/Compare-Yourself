@@ -13,6 +13,7 @@ protocol MeasurementPointRepositoryProtocol {
     func getAll() async throws -> [MeasurementPoint]
     func save() async throws
     func delete(_ point: MeasurementPoint) async throws
+    func deleteById(_ id: UUID) async throws
     
     // Specific queries
     func getActiveMeasurementPoints() async throws -> [MeasurementPoint]

@@ -18,25 +18,47 @@ struct MeasurementPointView: View {
         self.mp = mp
     }
     var body: some View {
-        VStack {
-            Text(mp.name)
-                .font(.largeTitle)
-            ForEach(vm.measurements) {
-                MeasurementRow(measurement: $0)
-            }
-            Spacer()
-            
-            Button("Add Measurement") {
-                vm.showingAddPoint.toggle()
+        List {
+            if vm.measurements.isEmpty {
+                ContentUnavailableView {
+                    Label("No Measurements", systemImage: "ruler")
+                } description: {
+                    Text("Add your first measurement for this point")
+                }
+            } else {
+                ForEach(vm.measurements) { measurement in
+                    MeasurementRow(measurement: measurement)
+                }
+                .onDelete { index in
+                    Task {
+                        await vm.deleteMeasurement(at: index, mpId: mp.pointId)
+                    }
+                }
             }
         }
-        .sheet(isPresented: $vm.showingAddPoint, onDismiss: {vm.fetchMeasurements(mpId: mp.pointId)}) {
+        .navigationTitle(mp.name)
+        .navigationBarTitleDisplayMode(.large)
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                Button {
+                    vm.showingAddPoint = true
+                } label: {
+                    Label("Add", systemImage: "plus")
+                }
+            }
+        }
+        .sheet(isPresented: $vm.showingAddPoint) {
+            vm.fetchMeasurements(mpId: mp.pointId)
+        } content: {
             AddMeasurement(
                 vm: container.makeAddMeasurementViewModel(),
                 measurementPoint: mp
             )
         }
         .onAppear {
+            vm.fetchMeasurements(mpId: mp.pointId)
+        }
+        .refreshable {
             vm.fetchMeasurements(mpId: mp.pointId)
         }
     }
@@ -56,10 +78,30 @@ struct MeasurementRow: View {
     
     var body: some View {
         HStack {
-            Text(measurement.value.description + " cm")
+            VStack(alignment: .leading, spacing: 4) {
+                Text("\(measurement.value, specifier: "%.1f") cm")
+                    .font(.headline)
+                
+                Text(measurement.date, style: .date)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                
+                if let note = measurement.notes {
+                    if !note.isEmpty{
+                        Text(note)
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                            .lineLimit(2)
+                    }
+                }
+            }
+            
             Spacer()
-            Text(measurement.date.description)
+            
+            Text(measurement.date, style: .time)
+                .font(.caption)
+                .foregroundStyle(.secondary)
         }
-        .padding(8)
+        .padding(.vertical, 4)
     }
 }
