@@ -16,6 +16,7 @@ class UserPreferences {
     }
     
     init() {
- 
+        let measurementSystemRawValue = UserDefaults.standard.string(forKey: "measurementSystem") ?? "metric"
+        self.measurementSystem = .init(rawValue: measurementSystemRawValue) ?? .metric
     }
 }

@@ -42,7 +42,7 @@ class MeasurementRepositoryTests {
     @Test func measurementCreation() async throws {
         // Write your test here and use APIs like `#expect(...)` to check expected conditions.
         let measurementPoint = MeasurementPoint(name: "Measurement Creation test")
-        let measurement = Measurement(value: 0.0, unit: .length, date: Date(), measurementPoint: measurementPoint)
+        let measurement = Measurement(value: 0.0, date: Date(), measurementPoint: measurementPoint)
         try await repository.create(measurement)
         
         let fetchDescriptor = FetchDescriptor<Compare_Yourself.Measurement>(sortBy: [SortDescriptor(\Compare_Yourself.Measurement.date)])
@@ -52,10 +52,10 @@ class MeasurementRepositoryTests {
         #expect(savedMeasurementCount == 1)
     }
     
-    @Test func gettAllMeasurements() async throws {
+    @Test func getAllMeasurements() async throws {
         let measurementPoint = MeasurementPoint(name: "Measurement Creation test")
-        let measurement = Measurement(value: 0.0, unit: .length, date: Date(), measurementPoint: measurementPoint)
-        let measurement2 = Measurement(value: 0.0, unit: .length, date: Date(), measurementPoint: measurementPoint)
+        let measurement = Measurement(value: 0.0, date: Date(), measurementPoint: measurementPoint)
+        let measurement2 = Measurement(value: 0.0, date: Date(), measurementPoint: measurementPoint)
         try await repository.create(measurement)
         try await repository.create(measurement2)
         
@@ -66,7 +66,7 @@ class MeasurementRepositoryTests {
     
     @Test func changeMeasurement() async throws {
         let measurementPoint = MeasurementPoint(name: "Measurement Creation test")
-        let measurement = Measurement(value: 0.0, unit: .length, date: Date(), measurementPoint: measurementPoint)
+        let measurement = Measurement(value: 0.0, date: Date(), measurementPoint: measurementPoint)
         try await repository.create(measurement)
         
         measurement.value = 10.0
@@ -78,7 +78,7 @@ class MeasurementRepositoryTests {
     
     @Test func deleteMeasurement() async throws {
         let measurementPoint = MeasurementPoint(name: "Measurement Creation test")
-        let measurement = Measurement(value: 0.0, unit: .length, date: Date(), measurementPoint: measurementPoint)
+        let measurement = Measurement(value: 0.0, date: Date(), measurementPoint: measurementPoint)
         try await repository.create(measurement)
         
         try await repository.delete(measurement)
@@ -90,8 +90,8 @@ class MeasurementRepositoryTests {
     @Test func getMeasurementsForPoint() async throws {
         let measurementPoint = MeasurementPoint(name: "Measurement Creation test")
         let measurementPoint2 = MeasurementPoint(name: "Measurement Creation test 2")
-        let measurement = Measurement(value: 0.0, unit: .length, date: Date(), measurementPoint: measurementPoint)
-        let measurement2 = Measurement(value: 0.0, unit: .length, date: Date(), measurementPoint: measurementPoint2)
+        let measurement = Measurement(value: 0.0, date: Date(), measurementPoint: measurementPoint)
+        let measurement2 = Measurement(value: 0.0, date: Date(), measurementPoint: measurementPoint2)
         try await repository.create(measurement)
         try await repository.create(measurement2)
         
@@ -102,8 +102,8 @@ class MeasurementRepositoryTests {
 
     @Test func getMearuementsInDateRange() async throws {
         let measurementPoint = MeasurementPoint(name: "Measurement Creation test")
-        let measurement = Measurement(value: 0.0, unit: .length, date: Date(), measurementPoint: measurementPoint)
-        let measurement2 = Measurement(value: 0.0, unit: .length, date: Date.now.addingTimeInterval(-60), measurementPoint: measurementPoint)
+        let measurement = Measurement(value: 0.0, date: Date(), measurementPoint: measurementPoint)
+        let measurement2 = Measurement(value: 0.0, date: Date.now.addingTimeInterval(-60), measurementPoint: measurementPoint)
         
         try await repository.create(measurement)
         try await repository.create(measurement2)
@@ -115,9 +115,9 @@ class MeasurementRepositoryTests {
     
     @Test func getLatestMeasurementForPoint() async throws {
         let measurementPoint = MeasurementPoint(name: "Measurement Creation test")
-        let measurement = Measurement(value: 10.0, unit: .length, date: Date(), measurementPoint: measurementPoint)
-        let measurement2 = Measurement(value: 0.0, unit: .length, date: Date.now.addingTimeInterval(-60), measurementPoint: measurementPoint)
-        let measurement3 = Measurement(value: 5.0, unit: .length, date: Date.now.addingTimeInterval(-20), measurementPoint: measurementPoint)
+        let measurement = Measurement(value: 10.0, date: Date(), measurementPoint: measurementPoint)
+        let measurement2 = Measurement(value: 0.0, date: Date.now.addingTimeInterval(-60), measurementPoint: measurementPoint)
+        let measurement3 = Measurement(value: 5.0, date: Date.now.addingTimeInterval(-20), measurementPoint: measurementPoint)
         
         try await repository.create(measurement)
         try await repository.create(measurement2)
@@ -132,11 +132,11 @@ class MeasurementRepositoryTests {
     @Test func getLatestMeasurementForPoints() async throws {
         let measurementPoint = MeasurementPoint(name: "Measurement Creation test")
         let measurementPoint2 = MeasurementPoint(name: "Measurement Creation test 2")
-        let measurement = Measurement(value: 10.0, unit: .length, date: Date(), measurementPoint: measurementPoint)
-        let measurement21 = Measurement(value: 11.0, unit: .length, date: Date(), measurementPoint: measurementPoint2)
-        let measurement2 = Measurement(value: 0.0, unit: .length, date: Date.now.addingTimeInterval(-60), measurementPoint: measurementPoint)
-        let measurement22 = Measurement(value: 0.0, unit: .length, date: Date.now.addingTimeInterval(-60), measurementPoint: measurementPoint2)
-        let measurement3 = Measurement(value: 5.0, unit: .length, date: Date.now.addingTimeInterval(-20), measurementPoint: measurementPoint)
+        let measurement = Measurement(value: 10.0, date: Date(), measurementPoint: measurementPoint)
+        let measurement21 = Measurement(value: 11.0, date: Date(), measurementPoint: measurementPoint2)
+        let measurement2 = Measurement(value: 0.0, date: Date.now.addingTimeInterval(-60), measurementPoint: measurementPoint)
+        let measurement22 = Measurement(value: 0.0, date: Date.now.addingTimeInterval(-60), measurementPoint: measurementPoint2)
+        let measurement3 = Measurement(value: 5.0, date: Date.now.addingTimeInterval(-20), measurementPoint: measurementPoint)
         
         try await repository.create(measurement)
         try await repository.create(measurement2)
