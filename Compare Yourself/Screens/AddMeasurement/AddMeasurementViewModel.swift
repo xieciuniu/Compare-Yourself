@@ -33,6 +33,13 @@ class AddMeasurementViewModel {
                 if measurementSystem == .imperial && measurementType == .length {
                     let feetValue = UnitConverter.centimetersToInches(lastValue)
                     (self.feetDigit, self.inchesOnesDigit, self.inchesTenthDigit) = UnitConverter.inchesToFeetAndInchesAndDecimal(feetValue)
+                } else if measurementSystem == .imperial && measurementType == .weight {
+                    let lastValueLbs = UnitConverter.kilogramsToPounds(lastValue)
+            
+                    self.hundredsDigit = Int(lastValueLbs) / 100
+                    self.tensDigit = (Int(lastValueLbs) / 10) % 10
+                    self.onesDigit = Int(lastValueLbs) % 10
+                    self.oneOfTensDigit = Int(lastValueLbs * 10) % 10
                 } else {
                     self.hundredsDigit = Int(lastValue) / 100
                     self.tensDigit = (Int(lastValue) / 10) % 10
@@ -58,9 +65,11 @@ class AddMeasurementViewModel {
     func addMeasurement(mp: MeasurementPoint, measurementSystem: MeasurementSystem, measurementType: MeasurementUnit) {
         let value: Double
         if measurementSystem == .imperial && measurementType == .length {
-            value = createValueImperial()
+            value = createValueFootInch()
+        } else if measurementSystem == .imperial && measurementType == .length {
+            value = createValuePounds()
         } else {
-            value = createValueMetric()
+            value = createValueBaseTen()
         }
         let measurement = Measurement(
             value: value,
@@ -77,7 +86,7 @@ class AddMeasurementViewModel {
         }
     }
     
-    func createValueMetric() -> Double {
+    func createValueBaseTen() -> Double {
         return Double(hundredsDigit) * 100 + Double(tensDigit) * 10 + Double(onesDigit) + Double(oneOfTensDigit) / 10
     }
     
@@ -85,8 +94,13 @@ class AddMeasurementViewModel {
         let inchesDecimal = Double(inchesTenthDigit) / 10 + Double(inchesOnesDigit)
         return UnitConverter.feetAndInchesToTotalInches(feet: feetDigit, inches: inchesDecimal)
     }
-    func createValueImperial() -> Double {
+    
+    func createValueFootInch() -> Double {
         return UnitConverter.inchesToCentimeters(convertToInches())
+    }
+    
+    func createValuePounds() -> Double {
+        return UnitConverter.poundsToKilograms(Double(hundredsDigit) * 100 + Double(tensDigit) * 10 + Double(onesDigit) + Double(oneOfTensDigit) / 10)
     }
     
     func getLastMeasurementValue(measurementPointId: UUID) async throws-> Double {

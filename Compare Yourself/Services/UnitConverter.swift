@@ -27,4 +27,12 @@ struct UnitConverter {
     static func feetAndInchesToTotalInches(feet: Int, inches: Double) -> Double {
         return Double(feet * 12) + inches
     }
+    
+    static func kilogramsToPounds(_ kilograms: Double) -> Double {
+        return kilograms * 2.20462
+    }
+    
+    static func poundsToKilograms(_ pounds: Double) -> Double {
+        return pounds / 2.20462
+    }
 }

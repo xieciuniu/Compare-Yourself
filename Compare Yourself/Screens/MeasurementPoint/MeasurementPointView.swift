@@ -80,6 +80,7 @@ struct MeasurementRow: View {
     let measurement: Measurement
     let measurementUnitString: String
     
+    // TODO: add calculator for punds
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {
