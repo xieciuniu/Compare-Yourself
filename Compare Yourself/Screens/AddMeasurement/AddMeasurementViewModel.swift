@@ -66,7 +66,7 @@ class AddMeasurementViewModel {
         let value: Double
         if measurementSystem == .imperial && measurementType == .length {
             value = createValueFootInch()
-        } else if measurementSystem == .imperial && measurementType == .length {
+        } else if measurementSystem == .imperial && measurementType == .weight {
             value = createValuePounds()
         } else {
             value = createValueBaseTen()

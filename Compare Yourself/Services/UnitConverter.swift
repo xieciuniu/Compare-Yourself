@@ -18,8 +18,9 @@ struct UnitConverter {
     
     static func inchesToFeetAndInchesAndDecimal(_ totalInches: Double) -> (feet: Int, inches: Int, decimal: Int) {
         let feet = Int(totalInches / 12)
-        let fullInches = Int(totalInches.truncatingRemainder(dividingBy: 12))
-        let decimalInches = Int((totalInches * 10).truncatingRemainder(dividingBy: 10))
+        let reminderInches = totalInches.truncatingRemainder(dividingBy: 12)
+        let fullInches = Int(reminderInches)
+        let decimalInches = Int((totalInches * 10).rounded().truncatingRemainder(dividingBy: 10))
         
         return (feet, fullInches, decimalInches)
     }

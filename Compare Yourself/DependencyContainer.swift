@@ -10,7 +10,7 @@ import SwiftData
 import Combine
 
 final class DependencyContainer: ObservableObject {
-    var userPreferences: UserPreferences
+    @Published var userPreferences: UserPreferences
     
     init() {
         self.userPreferences = UserPreferences()

@@ -58,7 +58,10 @@ struct MeasurementPointView: View {
         .onAppear {
             vm.fetchMeasurements(mpId: mp.pointId)
             if vm.unitString.isEmpty {
-                vm.measurementUnitString(measurementSystem: container.userPreferences.measurementSystem, measurementUnit: mp.measurementUnit)
+                vm.measurementUnitString(
+                    measurementSystem: container.userPreferences.measurementSystem,
+                    measurementUnit: mp.measurementUnit
+                )
             }
         }
         .refreshable {

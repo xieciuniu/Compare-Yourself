@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 @Observable
 class MeasurementPointViewModel {
@@ -15,7 +16,7 @@ class MeasurementPointViewModel {
         self.measurementRepository = measurementRepository
     }
     
-    var unitString = ""
+    @Published var unitString = ""
     var measurements: [Measurement] = []
     var showingAddPoint: Bool = false
     
