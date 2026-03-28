@@ -22,12 +22,14 @@ struct MeasurementPointListView: View {
             } else if vm.measurementPoints.isEmpty {
                 emptyStateView
             } else {
-                Button("Switch unit system: ") {
+                Button(action: {
                     if container.userPreferences.measurementSystem == .metric {
                         container.userPreferences.measurementSystem = .imperial
                     } else {
                         container.userPreferences.measurementSystem = .metric
                     }
+                }) {
+                    Text(container.userPreferences.measurementSystem == .metric ? "Switch to Imperial" : "Switch to Metric")
                 }
                 measurementPointsList
                 Spacer()

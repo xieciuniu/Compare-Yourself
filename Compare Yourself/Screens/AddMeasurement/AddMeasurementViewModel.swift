@@ -31,8 +31,8 @@ class AddMeasurementViewModel {
         do {
             if let lastValue = try repository.getLatestMeasurementForPoint(measurementPointId)?.value {
                 if measurementSystem == .imperial && measurementType == .length {
-                    let feetValue = UnitConverter.centimetersToInches(lastValue)
-                    (self.feetDigit, self.inchesOnesDigit, self.inchesTenthDigit) = UnitConverter.inchesToFeetAndInchesAndDecimal(feetValue)
+                    let totalInches = UnitConverter.centimetersToInches(lastValue)
+                    (self.feetDigit, self.inchesOnesDigit, self.inchesTenthDigit) = UnitConverter.inchesToFeetAndInchesAndDecimal(totalInches)
                 } else if measurementSystem == .imperial && measurementType == .weight {
                     let lastValueLbs = UnitConverter.kilogramsToPounds(lastValue)
             
@@ -48,7 +48,7 @@ class AddMeasurementViewModel {
                 }
             }
         } catch {
-            print("Failed to calculate last measurement digits")
+            print("Failed to calculate last measurement digits: \(error)")
         }
         switch measurementType {
         case .length:
@@ -100,7 +100,7 @@ class AddMeasurementViewModel {
     }
     
     func createValuePounds() -> Double {
-        return UnitConverter.poundsToKilograms(Double(hundredsDigit) * 100 + Double(tensDigit) * 10 + Double(onesDigit) + Double(oneOfTensDigit) / 10)
+        return UnitConverter.poundsToKilograms(createValueBaseTen())
     }
     
     func getLastMeasurementValue(measurementPointId: UUID) async throws-> Double {
