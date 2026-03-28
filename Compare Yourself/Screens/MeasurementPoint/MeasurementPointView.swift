@@ -80,7 +80,7 @@ struct MeasurementRow: View {
     let measurement: Measurement
     let measurementUnitString: String
     
-    // TODO: add calculator for punds
+    // TODO: add calculator for pounds
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {
@@ -89,7 +89,7 @@ struct MeasurementRow: View {
                         .font(.headline)
                 } else {
                     let inchTotal = UnitConverter.centimetersToInches(measurement.value)
-                    let (feet,inch,decimal) = UnitConverter.inchesToFeetAndInchesAndDecimal(inchTotal)
+                    let (feet, inch, decimal) = UnitConverter.inchesToFeetAndInchesAndDecimal(inchTotal)
                     
                     Text("\(feet) ft \(inch),\(decimal) inch")
                         .font(.headline)
