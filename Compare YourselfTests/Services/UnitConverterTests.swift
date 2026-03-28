@@ -32,7 +32,7 @@ struct UnitConverterTests {
     @Test func inchesToFeetAndInches() async throws {
         let inches: Double = 72.0
         
-        let result = await UnitConverter.inchesToFeetAndInches(inches)
+        let result = await UnitConverter.inchesToFeetAndInchesAndDecimal(inches)
         
         #expect(result.feet == 6, "Failed to convert 72 inches to 6 feet")
         #expect(result.inches == 0, "Failed to convert 72 inches to 0 inches")

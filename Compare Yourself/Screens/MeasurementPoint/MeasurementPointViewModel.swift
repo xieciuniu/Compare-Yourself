@@ -16,7 +16,7 @@ class MeasurementPointViewModel {
         self.measurementRepository = measurementRepository
     }
     
-    @Published var unitString = ""
+    var unitString = ""
     var measurements: [Measurement] = []
     var showingAddPoint: Bool = false
     
