@@ -10,6 +10,11 @@ import SwiftData
 import Combine
 
 final class DependencyContainer: ObservableObject {
+    @Published var userPreferences: UserPreferences
+    
+    init() {
+        self.userPreferences = UserPreferences()
+    }
     
     private(set) lazy var modelContext: ModelContext = {
         let schema = Schema([

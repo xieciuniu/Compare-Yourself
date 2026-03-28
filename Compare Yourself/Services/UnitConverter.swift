@@ -16,14 +16,24 @@ struct UnitConverter {
         return cm / 2.54
     }
     
-    static func inchesToFeetAndInches(_ totalInches: Double) -> (feet: Int, inches: Double) {
+    static func inchesToFeetAndInchesAndDecimal(_ totalInches: Double) -> (feet: Int, inches: Int, decimal: Int) {
         let feet = Int(totalInches / 12)
-        let remainingInches = totalInches.truncatingRemainder(dividingBy: 12)
+        let reminderInches = totalInches.truncatingRemainder(dividingBy: 12)
+        let fullInches = Int(reminderInches)
+        let decimalInches = Int((totalInches * 10).rounded().truncatingRemainder(dividingBy: 10))
         
-        return (feet, remainingInches)
+        return (feet, fullInches, decimalInches)
     }
     
     static func feetAndInchesToTotalInches(feet: Int, inches: Double) -> Double {
         return Double(feet * 12) + inches
+    }
+    
+    static func kilogramsToPounds(_ kilograms: Double) -> Double {
+        return kilograms * 2.20462
+    }
+    
+    static func poundsToKilograms(_ pounds: Double) -> Double {
+        return pounds / 2.20462
     }
 }

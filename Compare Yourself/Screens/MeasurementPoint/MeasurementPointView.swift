@@ -27,7 +27,7 @@ struct MeasurementPointView: View {
                 }
             } else {
                 ForEach(vm.measurements) { measurement in
-                    MeasurementRow(measurement: measurement)
+                    MeasurementRow(measurement: measurement, measurementUnitString: vm.unitString)
                 }
                 .onDelete { index in
                     Task {
@@ -57,6 +57,12 @@ struct MeasurementPointView: View {
         }
         .onAppear {
             vm.fetchMeasurements(mpId: mp.pointId)
+            if vm.unitString.isEmpty {
+                vm.measurementUnitString(
+                    measurementSystem: container.userPreferences.measurementSystem,
+                    measurementUnit: mp.measurementUnit
+                )
+            }
         }
         .refreshable {
             vm.fetchMeasurements(mpId: mp.pointId)
@@ -75,12 +81,22 @@ struct MeasurementPointView: View {
 
 struct MeasurementRow: View {
     let measurement: Measurement
+    let measurementUnitString: String
     
+    // TODO: add calculator for pounds
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {
-                Text("\(measurement.value, specifier: "%.1f") cm")
-                    .font(.headline)
+                if measurementUnitString != "ft" {
+                    Text("\(measurement.value, specifier: "%.1f") \(measurementUnitString)")
+                        .font(.headline)
+                } else {
+                    let inchTotal = UnitConverter.centimetersToInches(measurement.value)
+                    let (feet, inch, decimal) = UnitConverter.inchesToFeetAndInchesAndDecimal(inchTotal)
+                    
+                    Text("\(feet) ft \(inch),\(decimal) inch")
+                        .font(.headline)
+                }
                 
                 Text(measurement.date, style: .date)
                     .font(.caption)
