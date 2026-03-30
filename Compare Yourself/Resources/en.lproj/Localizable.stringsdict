@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+
+    <!-- "%d days ago" — global.time.daysAgo -->
+    <key>global.time.daysAgo</key>
+    <dict>
+        <key>NSStringLocalizedFormatKey</key>
+        <string>%#@days@</string>
+        <key>days</key>
+        <dict>
+            <key>NSStringFormatSpecTypeKey</key>
+            <string>NSStringPluralRuleType</string>
+            <key>NSStringFormatValueTypeKey</key>
+            <string>d</string>
+            <key>one</key>
+            <string>1 day ago</string>
+            <key>other</key>
+            <string>%d days ago</string>
+        </dict>
+    </dict>
+
+    <!-- "%d weeks ago" — global.time.weeksAgo -->
+    <key>global.time.weeksAgo</key>
+    <dict>
+        <key>NSStringLocalizedFormatKey</key>
+        <string>%#@weeks@</string>
+        <key>weeks</key>
+        <dict>
+            <key>NSStringFormatSpecTypeKey</key>
+            <string>NSStringPluralRuleType</string>
+            <key>NSStringFormatValueTypeKey</key>
+            <string>d</string>
+            <key>one</key>
+            <string>1 week ago</string>
+            <key>other</key>
+            <string>%d weeks ago</string>
+        </dict>
+    </dict>
+
+    <!-- "%d months ago" — global.time.monthsAgo -->
+    <key>global.time.monthsAgo</key>
+    <dict>
+        <key>NSStringLocalizedFormatKey</key>
+        <string>%#@months@</string>
+        <key>months</key>
+        <dict>
+            <key>NSStringFormatSpecTypeKey</key>
+            <string>NSStringPluralRuleType</string>
+            <key>NSStringFormatValueTypeKey</key>
+            <string>d</string>
+            <key>one</key>
+            <string>1 month ago</string>
+            <key>other</key>
+            <string>%d months ago</string>
+        </dict>
+    </dict>
+
+    <!-- measurement entries count — used in delete confirmation -->
+    <!-- "pointDetail.delete.message" references %d measurements -->
+    <key>pointDetail.delete.measurementCount</key>
+    <dict>
+        <key>NSStringLocalizedFormatKey</key>
+        <string>%#@measurements@</string>
+        <key>measurements</key>
+        <dict>
+            <key>NSStringFormatSpecTypeKey</key>
+            <string>NSStringPluralRuleType</string>
+            <key>NSStringFormatValueTypeKey</key>
+            <string>d</string>
+            <key>one</key>
+            <string>1 measurement</string>
+            <key>other</key>
+            <string>%d measurements</string>
+        </dict>
+    </dict>
+
+    <!-- photo count in comparison summary — photos.comparison.summary -->
+    <key>photos.comparison.summary</key>
+    <dict>
+        <key>NSStringLocalizedFormatKey</key>
+        <string>%#@days@ · %#@photos@</string>
+        <key>days</key>
+        <dict>
+            <key>NSStringFormatSpecTypeKey</key>
+            <string>NSStringPluralRuleType</string>
+            <key>NSStringFormatValueTypeKey</key>
+            <string>d</string>
+            <key>one</key>
+            <string>1 day</string>
+            <key>other</key>
+            <string>%d days</string>
+        </dict>
+        <key>photos</key>
+        <dict>
+            <key>NSStringFormatSpecTypeKey</key>
+            <string>NSStringPluralRuleType</string>
+            <key>NSStringFormatValueTypeKey</key>
+            <string>d</string>
+            <key>one</key>
+            <string>1 photo</string>
+            <key>other</key>
+            <string>%d photos</string>
+        </dict>
+    </dict>
+
+    <!-- consistency goal frequency — goals.form.frequency.label -->
+    <key>goals.frequency.timesPerWeek</key>
+    <dict>
+        <key>NSStringLocalizedFormatKey</key>
+        <string>%#@times@</string>
+        <key>times</key>
+        <dict>
+            <key>NSStringFormatSpecTypeKey</key>
+            <string>NSStringPluralRuleType</string>
+            <key>NSStringFormatValueTypeKey</key>
+            <string>d</string>
+            <key>one</key>
+            <string>1 time per week</string>
+            <key>other</key>
+            <string>%d times per week</string>
+        </dict>
+    </dict>
+
+    <!-- photo frequency goal — every N days -->
+    <key>goals.frequency.everyNDays</key>
+    <dict>
+        <key>NSStringLocalizedFormatKey</key>
+        <string>%#@days@</string>
+        <key>days</key>
+        <dict>
+            <key>NSStringFormatSpecTypeKey</key>
+            <string>NSStringPluralRuleType</string>
+            <key>NSStringFormatValueTypeKey</key>
+            <string>d</string>
+            <key>one</key>
+            <string>Every day</string>
+            <key>other</key>
+            <string>Every %d days</string>
+        </dict>
+    </dict>
+
+</dict>
+</plist>
