@@ -16,21 +16,12 @@ struct MeasurementPointListView: View {
     }
     
     var body: some View {
-        Group {
+        NavigationStack {
             if vm.isLoading {
                 ProgressView("Loading...")
             } else if vm.measurementPoints.isEmpty {
                 emptyStateView
             } else {
-                Button(action: {
-                    if container.userPreferences.measurementSystem == .metric {
-                        container.userPreferences.measurementSystem = .imperial
-                    } else {
-                        container.userPreferences.measurementSystem = .metric
-                    }
-                }) {
-                    Text(container.userPreferences.measurementSystem == .metric ? "Switch to Imperial" : "Switch to Metric")
-                }
                 measurementPointsList
                 Spacer()
                 Button("Add Measurement Point") {
@@ -94,12 +85,6 @@ struct MeasurementPointListView: View {
     
 }
 
-#Preview {
-    let container = DependencyContainer()
-    MeasurementPointListView(vm: container.makeMeasurementPointListViewModel())
-        .environmentObject(container)
-}
-
 struct MeasurementPointListRowView: View {
     let point: MeasurementPoint
     let unit: String
@@ -119,8 +104,8 @@ struct MeasurementPointListRowView: View {
                     Text(unit + " |")
                     Text(point.dateOfLastUpdate, style: .date)
                 }
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+                .font(.caption)
+                .foregroundStyle(.secondary)
             }
             
             Spacer()
@@ -139,4 +124,10 @@ struct MeasurementPointListRowView: View {
         }
         .padding(.vertical, 4)
     }
+}
+
+#Preview {
+    let container = DependencyContainer()
+    MeasurementPointListView(vm: container.makeMeasurementPointListViewModel())
+        .environmentObject(container)
 }

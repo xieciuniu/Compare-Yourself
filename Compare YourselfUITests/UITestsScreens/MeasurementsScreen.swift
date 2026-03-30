@@ -1,5 +1,5 @@
 //
-//  MeasurementScreen.swift
+//  MeasurementsScreen.swift
 //  Compare YourselfUITests
 //
 //  Created by Hubert Wojtowicz on 29/03/2026.
@@ -8,7 +8,7 @@
 import Foundation
 import XCUIAutomation
 
-struct MeasurementScreen {
+struct MeasurementsScreen {
     let app: XCUIApplication
     var appScreen: AppScreen { AppScreen(app: app) }
     

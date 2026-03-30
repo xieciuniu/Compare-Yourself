@@ -79,14 +79,3 @@ extension View {
             .kerning(0.5)
     }
 }
-
-// MARK: - Convenience Shapes
-
-extension RoundedRectangle {
-    /// Standard card shape (14pt radius)
-    static let card    = RoundedRectangle(cornerRadius: CornerRadius.lg)
-    /// Button / chip shape (10pt radius)
-    static let chip    = RoundedRectangle(cornerRadius: CornerRadius.md)
-    /// Small badge shape (6pt radius)
-    static let badge   = RoundedRectangle(cornerRadius: CornerRadius.sm)
-}

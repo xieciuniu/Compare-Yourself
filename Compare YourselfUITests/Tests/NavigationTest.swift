@@ -22,18 +22,21 @@ final class NavigationTest: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() throws {
+    func testSwitchBetweenTabs() throws {
         // UI tests must launch the application that they test.
         let app = XCUIApplication()
         app.launch()
 
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testLaunchPerformance() throws {
-        // This measures how long it takes to launch your application.
-        measure(metrics: [XCTApplicationLaunchMetric()]) {
-            XCUIApplication().launch()
-        }
+        let appScreen = AppScreen(app: app)
+        
+        appScreen
+            .goToSettings()
+            .appScreen
+            .goToMeasurements()
+            .appScreen
+            .goToPhotos()
+            .appScreen
+            .goToDashboard()
+        
     }
 }

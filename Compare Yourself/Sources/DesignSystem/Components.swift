@@ -33,7 +33,7 @@ struct PrimaryButton: View {
             .frame(maxWidth: .infinity)
             .padding(.vertical, 14)
             .background(Color.energy)
-            .clipShape(RoundedRectangle.chip)
+            .clipShape(RoundedRectangle(cornerRadius: CornerRadius.md))
         }
     }
 }
@@ -63,8 +63,8 @@ struct SecondaryButton: View {
             .frame(maxWidth: .infinity)
             .padding(.vertical, 14)
             .background(Color.backgroundSurface)
-            .clipShape(RoundedRectangle.chip)
-            .overlay(RoundedRectangle.chip.stroke(Color.borderDefault, lineWidth: 0.5))
+            .clipShape(RoundedRectangle(cornerRadius: CornerRadius.lg))
+            .overlay(RoundedRectangle(cornerRadius: CornerRadius.md).stroke(Color.borderDefault, lineWidth: 0.5))
         }
     }
 }
@@ -89,7 +89,7 @@ struct StatChip: View {
         .frame(maxWidth: .infinity)
         .padding(.vertical, Spacing.sm + 2)
         .background(Color.backgroundSurface)
-        .clipShape(RoundedRectangle.chip)
+        .clipShape(RoundedRectangle(cornerRadius: CornerRadius.md))
     }
 }
 
