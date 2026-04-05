@@ -16,20 +16,13 @@ struct SettingsView: View {
                 SettingsRow(icon: "ruler", iconBackground: Color.Background.backgroundOverlay, label: L10n.Settings.Units.label, trailing: {
                     Picker("", selection: $container.userPreferences.measurementSystem) {
                         Text("Metric").tag(MeasurementSystem.metric)
+                            .accessibilityIdentifier("Picker-Metric")
                         Text("Imperial").tag(MeasurementSystem.imperial)
+                            .accessibilityIdentifier("Picker-Imperial")
                     }
                     .pickerStyle(.segmented)
                     .tint(Color.Brand.colorProgress)
                 })
-            }
-            Button(action: {
-                if container.userPreferences.measurementSystem == .metric {
-                    container.userPreferences.measurementSystem = .imperial
-                } else {
-                    container.userPreferences.measurementSystem = .metric
-                }
-            }) {
-                Text(container.userPreferences.measurementSystem == .metric ? "Switch to Imperial" : "Switch to Metric")
             }
         }
     }

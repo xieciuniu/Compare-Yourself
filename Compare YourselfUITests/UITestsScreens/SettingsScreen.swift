@@ -14,10 +14,17 @@ struct SettingsScreen {
     
     // Elements specific to Settings...
     var unitPicker: XCUIElement { app.segmentedControls["unitSystemPicker"] }
+    var metricButton: XCUIElement { app.buttons["Picker-Metric"] }
+    var imperialButton: XCUIElement { app.buttons["Picker-Imperial"] }
     
     // Actions specific to Settings...
     func selectMetric() -> Self {
-        unitPicker.buttons["Metric"].tap()
+        metricButton.tap()
+        return self
+    }
+    
+    func selectImperial() -> Self {
+        imperialButton.tap()
         return self
     }
 }
