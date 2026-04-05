@@ -27,7 +27,7 @@ struct MeasurementPointView: View {
                 }
             } else {
                 ForEach(vm.measurements) { measurement in
-                    MeasurementRow(measurement: measurement, measurementUnitString: vm.unitString)
+                    MeasurementRowInside(measurement: measurement, measurementUnitString: vm.unitString)
                 }
                 .onDelete { index in
                     Task {
@@ -79,7 +79,7 @@ struct MeasurementPointView: View {
         .environmentObject(container)
 }
 
-struct MeasurementRow: View {
+struct MeasurementRowInside: View {
     let measurement: Measurement
     let measurementUnitString: String
     

@@ -12,10 +12,31 @@ struct ContentView: View {
     @EnvironmentObject var container: DependencyContainer
     
     var body: some View {
-        Group {
-            NavigationStack {
+        NavigationStack {
+            TabView {
+                DashboardView()
+                    .tabItem {
+                        Label("Dashboard", systemImage: "house")
+                            .accessibilityIdentifier("dashboardTab")
+                    }
                 MeasurementPointListView(vm: container.makeMeasurementPointListViewModel())
+                    .tabItem {
+                        Label("Measurements", systemImage: "ruler")
+                            .accessibilityIdentifier("measurementsTab")
+                    }
+                PhotosView()
+                    .tabItem {
+                        Label("Photos", systemImage: "camera.viewfinder")
+                            .accessibilityIdentifier("photosTab")
+                    }
+                SettingsView()
+                    .tabItem {
+                        Label("Settings", systemImage: "gearshape")
+                            .accessibilityIdentifier("settingsTab")
+                    }
             }
+            .tint(Color.Brand.colorEnergy)
+            .background(Color.Background.backgroundElevated)
         }
     }
 }

@@ -1,0 +1,361 @@
+// ─────────────────────────────────────────────────────────────────────────────
+// Localizable.strings — Compare Yourself
+// Base language: English (en)
+//
+// Structure mirrors the app's screen hierarchy so keys are easy to locate.
+// Key format: screen.component.element
+// Plurals are handled in Localizable.stringsdict (see below for candidates).
+// ─────────────────────────────────────────────────────────────────────────────
+
+
+// ─────────────────────────────────────────────────────────────────────────────
+// MARK: - Global / Shared
+// ─────────────────────────────────────────────────────────────────────────────
+
+"global.action.save"        = "Save";
+"global.action.cancel"      = "Cancel";
+"global.action.delete"      = "Delete";
+"global.action.edit"        = "Edit";
+"global.action.done"        = "Done";
+"global.action.add"         = "Add";
+"global.action.confirm"     = "Confirm";
+"global.action.seeAll"      = "See all";
+"global.action.export"      = "Export";
+"global.action.tryAgain"    = "Try again";
+"global.action.close"       = "Close";
+
+"global.unit.cm"            = "cm";
+"global.unit.kg"            = "kg";
+"global.unit.lbs"           = "lbs";
+"global.unit.inches"        = "in";
+"global.unit.meters"        = "m";
+"global.unit.metric"        = "Metric";
+"global.unit.imperial"      = "Imperial";
+
+"global.time.today"         = "Today";
+"global.time.yesterday"     = "Yesterday";
+"global.time.daysAgo"       = "%d days ago";
+"global.time.weeksAgo"      = "%d weeks ago";
+"global.time.monthsAgo"     = "%d months ago";
+"global.time.justNow"       = "Just now";
+
+"global.empty.noData"       = "No data yet";
+"global.error.generic"      = "Something went wrong. Try again.";
+"global.error.saveFailed"   = "Couldn't save. Try again.";
+
+
+// ─────────────────────────────────────────────────────────────────────────────
+// MARK: - Tab Bar
+// ─────────────────────────────────────────────────────────────────────────────
+
+"tabBar.dashboard"    = "Dashboard";
+"tabBar.measurements" = "Measurements";
+"tabBar.photos"       = "Photos";
+"tabBar.settings"     = "Settings";
+
+
+// ─────────────────────────────────────────────────────────────────────────────
+// MARK: - Dashboard
+// ─────────────────────────────────────────────────────────────────────────────
+
+"dashboard.title"                        = "Compare Yourself";
+
+// Goal card
+"dashboard.goal.sectionLabel"            = "Current goal";
+"dashboard.goal.target"                  = "Target";
+"dashboard.goal.lastMeasured"            = "Last measured";
+"dashboard.goal.empty.title"             = "No active goal";
+"dashboard.goal.empty.subtitle"          = "Set a goal to track your progress";
+"dashboard.goal.empty.action"            = "Set a goal";
+"dashboard.goal.achieved"                = "Goal reached";
+
+// Quick actions
+"dashboard.actions.addMeasurement"       = "Add measurement";
+"dashboard.actions.takePhoto"            = "Take photo";
+
+// Recent measurements
+"dashboard.recentMeasurements.title"     = "Recent measurements";
+"dashboard.recentMeasurements.empty"     = "No measurements yet — start by adding a measurement point";
+
+// Recent photo
+"dashboard.recentPhoto.title"            = "Last progress photo";
+"dashboard.recentPhoto.empty.title"      = "No photos yet";
+"dashboard.recentPhoto.empty.subtitle"   = "Take your first progress photo";
+"dashboard.recentPhoto.empty.action"     = "Take photo";
+"dashboard.recentPhoto.daysAgo"          = "%d days ago";
+
+
+// ─────────────────────────────────────────────────────────────────────────────
+// MARK: - Measurements Tab
+// ─────────────────────────────────────────────────────────────────────────────
+
+"measurements.title"                     = "Measurements";
+"measurements.segment.list"              = "List";
+"measurements.segment.diagram"           = "Diagram";
+
+// List view
+"measurements.list.sectionBody"          = "Body measurements";
+"measurements.list.empty.title"          = "No measurement points yet";
+"measurements.list.empty.subtitle"       = "Add your first measurement point to get started";
+"measurements.list.empty.action"         = "Add measurement point";
+"measurements.list.row.noMeasurements"   = "No measurements yet";
+"measurements.list.row.location"         = "%@ · %@";   // e.g. "Front diagram · Core"
+
+// Diagram view
+"measurements.diagram.front"             = "Front";
+"measurements.diagram.side"              = "Side";
+"measurements.diagram.empty.hint"        = "Tap the diagram to place a new pin";
+"measurements.diagram.addPin.title"      = "Add pin here?";
+"measurements.diagram.addPin.subtitle"   = "This will create a new measurement point at this location";
+"measurements.diagram.addPin.confirm"    = "Add pin";
+"measurements.diagram.addPin.cancel"     = "Cancel";
+
+// Pin states
+"measurements.pin.state.new"             = "New";
+"measurements.pin.state.recent"          = "Recent";
+"measurements.pin.state.active"          = "Active";
+"measurements.pin.state.stale"           = "Stale";
+
+// Pin tooltip (floating card on tap)
+"measurements.pin.tooltip.lastValue"     = "Last measurement";
+"measurements.pin.tooltip.noHistory"     = "No measurements recorded yet";
+"measurements.pin.tooltip.addButton"     = "Add measurement";
+"measurements.pin.tooltip.historyButton" = "View history";
+
+// Pin context menu (long press)
+"measurements.pin.menu.addMeasurement"   = "Add measurement";
+"measurements.pin.menu.edit"             = "Edit";
+"measurements.pin.menu.archive"          = "Archive";
+
+
+// ─────────────────────────────────────────────────────────────────────────────
+// MARK: - Add Measurement Point
+// ─────────────────────────────────────────────────────────────────────────────
+
+"addPoint.title"                         = "New measurement point";
+"addPoint.field.name.label"              = "Name";
+"addPoint.field.name.placeholder"        = "e.g. Right Bicep — Flexed";
+"addPoint.field.location.label"          = "Body area";
+"addPoint.field.location.placeholder"    = "e.g. Right arm";
+"addPoint.field.unit.label"              = "Unit";
+"addPoint.action.save"                   = "Save point";
+"addPoint.error.nameRequired"            = "Please enter a name for this point";
+"addPoint.error.nameTooLong"             = "Name must be 50 characters or fewer";
+
+
+// ─────────────────────────────────────────────────────────────────────────────
+// MARK: - Measurement Point Detail
+// ─────────────────────────────────────────────────────────────────────────────
+
+"pointDetail.nav.back"                   = "Measurements";
+
+// Stats row
+"pointDetail.stats.latest"               = "Latest (%@)";   // e.g. "Latest (cm)"
+"pointDetail.stats.totalGain"            = "Total gain";
+"pointDetail.stats.totalLoss"            = "Total loss";
+"pointDetail.stats.best"                 = "Best (%@)";
+"pointDetail.stats.entries"              = "Entries";
+"pointDetail.stats.average"              = "Average";
+"pointDetail.stats.noData"               = "—";
+
+// Chart date range
+"pointDetail.chart.range.oneMonth"       = "1M";
+"pointDetail.chart.range.threeMonths"    = "3M";
+"pointDetail.chart.range.sixMonths"      = "6M";
+"pointDetail.chart.range.oneYear"        = "1Y";
+"pointDetail.chart.range.all"            = "All";
+"pointDetail.chart.empty"                = "Add at least two measurements to see a chart";
+
+// History list
+"pointDetail.history.title"              = "History";
+"pointDetail.history.empty"              = "No measurements recorded yet";
+"pointDetail.history.firstEntry"         = "First entry";
+
+// Options menu
+"pointDetail.menu.edit"                  = "Edit point";
+"pointDetail.menu.archive"               = "Archive point";
+"pointDetail.menu.delete"                = "Delete point";
+"pointDetail.menu.export"                = "Export data";
+
+// Delete confirmation
+"pointDetail.delete.title"               = "Delete measurement point?";
+"pointDetail.delete.message"             = "This will permanently delete \"%@\" and all %d measurements. This cannot be undone.";
+"pointDetail.delete.confirm"             = "Delete";
+"pointDetail.delete.cancel"              = "Cancel";
+
+
+// ─────────────────────────────────────────────────────────────────────────────
+// MARK: - Add Measurement
+// ─────────────────────────────────────────────────────────────────────────────
+
+"addMeasurement.title"                   = "Add measurement";
+"addMeasurement.field.value.label"       = "Value";
+"addMeasurement.field.value.placeholder" = "0.0";
+"addMeasurement.field.date.label"        = "Date";
+"addMeasurement.field.notes.label"       = "Notes";
+"addMeasurement.field.notes.placeholder" = "Optional note…";
+"addMeasurement.field.linkPhoto.label"   = "Link to photo";
+"addMeasurement.field.linkPhoto.none"    = "None";
+"addMeasurement.lastValue"               = "Last: %@ %@";   // e.g. "Last: 38.5 cm"
+"addMeasurement.action.save"             = "Save measurement";
+"addMeasurement.action.saveAndPhoto"     = "Save & take photo";
+"addMeasurement.error.valueRequired"     = "Please enter a value";
+"addMeasurement.error.valueInvalid"      = "Please enter a valid number";
+"addMeasurement.confirmation"            = "Logged. Keep going.";
+
+
+// ─────────────────────────────────────────────────────────────────────────────
+// MARK: - Photos Tab
+// ─────────────────────────────────────────────────────────────────────────────
+
+"photos.title"                           = "Photos";
+
+// Before/after hero card
+"photos.comparison.title"                = "Before vs now";
+"photos.comparison.action"               = "Compare";
+"photos.comparison.before"               = "Before";
+"photos.comparison.now"                  = "Now";
+"photos.comparison.summary"              = "%d days · %d photos";
+
+// Gallery
+"photos.gallery.title"                   = "All photos";
+"photos.gallery.empty.title"             = "No photos yet";
+"photos.gallery.empty.subtitle"          = "Take your first progress photo to start your visual timeline";
+"photos.gallery.empty.action"            = "Take photo";
+
+// Photo detail
+"photos.detail.date"                     = "%@";
+"photos.detail.notes.placeholder"        = "Add a note to this photo…";
+"photos.detail.linkedMeasurements"       = "Linked measurements";
+"photos.detail.delete.title"             = "Delete photo?";
+"photos.detail.delete.message"           = "This photo will be permanently deleted. This cannot be undone.";
+"photos.detail.delete.confirm"           = "Delete";
+
+// Side-by-side comparison
+"photos.sideBy.title"                    = "Compare photos";
+"photos.sideBy.selectFirst"              = "Select first photo";
+"photos.sideBy.selectSecond"             = "Select second photo";
+
+
+// ─────────────────────────────────────────────────────────────────────────────
+// MARK: - Camera Capture
+// ─────────────────────────────────────────────────────────────────────────────
+
+"camera.title"                           = "Progress photo";
+"camera.action.cancel"                   = "Cancel";
+"camera.action.capture"                  = "Take photo";
+"camera.action.retake"                   = "Retake";
+"camera.action.usePhoto"                 = "Use photo";
+
+// Ghost overlay
+"camera.ghost.label"                     = "Ghost opacity";
+"camera.ghost.toggle.show"               = "Show overlay";
+"camera.ghost.toggle.hide"               = "Hide overlay";
+"camera.ghost.noReference"               = "No previous photo to overlay";
+
+// LiDAR HUD
+"camera.lidar.distance.label"            = "Distance";
+"camera.lidar.angle.label"               = "Angle";
+"camera.lidar.target"                    = "Target %@";   // e.g. "Target 1.1 m"
+"camera.lidar.status.good"               = "Good position";
+"camera.lidar.status.tooClose"           = "Move back";
+"camera.lidar.status.tooFar"             = "Move closer";
+"camera.lidar.status.angleOff"           = "Adjust angle";
+"camera.lidar.unavailable"               = "LiDAR not available on this device";
+
+// Permissions
+"camera.permission.denied.title"         = "Camera access needed";
+"camera.permission.denied.message"       = "Please allow camera access in Settings to take progress photos.";
+"camera.permission.denied.action"        = "Open Settings";
+
+
+// ─────────────────────────────────────────────────────────────────────────────
+// MARK: - Goals
+// ─────────────────────────────────────────────────────────────────────────────
+
+"goals.title"                            = "Goals";
+"goals.add.title"                        = "New goal";
+"goals.empty.title"                      = "No active goals";
+"goals.empty.subtitle"                   = "Set a goal to track your progress";
+"goals.empty.action"                     = "Set a goal";
+
+// Goal types
+"goals.type.measurement"                 = "Measurement target";
+"goals.type.weight"                      = "Weight target";
+"goals.type.consistency"                 = "Consistency";
+"goals.type.photoFrequency"              = "Photo frequency";
+
+// Goal directions
+"goals.direction.increase"               = "Increase";
+"goals.direction.decrease"               = "Decrease";
+
+// Goal form
+"goals.form.name.label"                  = "Goal name";
+"goals.form.name.placeholder"            = "e.g. Reduce waist size";
+"goals.form.target.label"                = "Target value";
+"goals.form.direction.label"             = "Direction";
+"goals.form.point.label"                 = "Measurement point";
+"goals.form.frequency.label"             = "Times per week";
+"goals.form.photoDays.label"             = "Every (days)";
+
+// Goal progress
+"goals.progress.achieved"                = "Achieved";
+"goals.progress.current"                 = "Current: %@ %@";
+"goals.progress.target"                  = "Target: %@ %@";
+"goals.progress.remaining"               = "%@ %@ to go";
+
+// Goal card
+"goals.card.trend.improving"             = "Improving";
+"goals.card.trend.steady"                = "Steady";
+"goals.card.trend.declining"             = "Declining";
+
+
+// ─────────────────────────────────────────────────────────────────────────────
+// MARK: - Settings
+// ─────────────────────────────────────────────────────────────────────────────
+
+"settings.title"                         = "Settings";
+
+// Profile card
+"settings.profile.memberSince"           = "Member since %@";
+
+// Section headers
+"settings.section.preferences"           = "Preferences";
+"settings.section.dataSync"              = "Data & sync";
+"settings.section.about"                 = "About";
+"settings.section.dangerZone"            = "Danger zone";
+
+// Preferences
+"settings.units.label"                   = "Measurement units";
+
+// Sync
+"settings.sync.label"                    = "iCloud sync";
+"settings.sync.lastSynced"               = "Last synced %@";
+"settings.sync.lastSynced.never"         = "Never synced";
+"settings.sync.syncing"                  = "Syncing…";
+"settings.sync.error"                    = "Sync error — tap to retry";
+
+// Export
+"settings.export.label"                  = "Export data";
+"settings.export.subtitle"               = "JSON · CSV";
+"settings.export.sheet.title"            = "Export your data";
+"settings.export.format.json"            = "Export as JSON";
+"settings.export.format.csv"             = "Export as CSV";
+"settings.export.success"                = "Data exported successfully";
+"settings.export.error"                  = "Export failed. Try again.";
+
+// About
+"settings.about.label"                   = "About Compare Yourself";
+"settings.version.label"                 = "Version";
+"settings.privacy.label"                 = "Privacy policy";
+
+// Danger zone
+"settings.reset.label"                   = "Reset all data";
+"settings.reset.subtitle"                = "Permanently deletes all measurements and photos";
+"settings.reset.confirm.title"           = "Reset all data?";
+"settings.reset.confirm.message"         = "This will permanently delete all your measurements, photos, and goals. This cannot be undone.";
+"settings.reset.confirm.action"          = "Reset everything";
+"settings.reset.confirm.cancel"          = "Cancel";
+
+// App tagline (bottom of settings)
+"settings.tagline"                       = "Made with purpose.";

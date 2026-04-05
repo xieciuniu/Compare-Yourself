@@ -1,0 +1,18 @@
+xcassets:
+  - inputs: Resources/Colors.xcassets
+    outputs:
+      - templateName: swift5
+        output: Generated/Colors.swift
+        params:
+          accessModifier: internal
+          forceProvidesNamespaces: true
+ 
+strings:
+  - inputs: Resources/en.lproj/Localizable.strings
+    outputs:
+      - templateName: structured-swift5
+        output: Generated/Strings.swift
+        params:
+          accessModifier: internal
+          publicAccess: false
+ 
