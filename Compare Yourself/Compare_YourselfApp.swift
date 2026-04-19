@@ -10,20 +10,18 @@ import SwiftData
 
 @main
 struct Compare_YourselfApp: App {
-    var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            MeasurementPoint.self,
-            Measurement.self
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-
-        do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
-        }
-    }()
-    @StateObject private var container = DependencyContainer()
+    let sharedModelContainer: ModelContainer
+    @StateObject private var container: DependencyContainer
+    
+    init() {
+        let schema = Schema([MeasurementPoint.self, Measurement.self])
+        let config = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+        let mc = try! ModelContainer(for: schema, configurations: [config])
+        self.sharedModelContainer = mc
+        self._container = StateObject(
+            wrappedValue: DependencyContainer(modelContext: ModelContext(mc))
+        )
+    }
 
     var body: some Scene {
         WindowGroup {

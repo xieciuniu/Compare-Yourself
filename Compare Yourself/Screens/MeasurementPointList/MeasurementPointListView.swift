@@ -127,7 +127,7 @@ struct MeasurementPointListRowView: View {
 }
 
 #Preview {
-    let container = DependencyContainer()
+    let container = DependencyContainer.preview()
     MeasurementPointListView(vm: container.makeMeasurementPointListViewModel())
         .environmentObject(container)
 }

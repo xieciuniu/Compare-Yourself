@@ -11,30 +11,12 @@ import Combine
 
 final class DependencyContainer: ObservableObject {
     @Published var userPreferences: UserPreferences
+    private(set) var modelContext: ModelContext
     
-    init() {
+    init(modelContext: ModelContext) {
         self.userPreferences = UserPreferences()
+        self.modelContext = modelContext
     }
-    
-    private(set) lazy var modelContext: ModelContext = {
-        let schema = Schema([
-            MeasurementPoint.self,
-            Measurement.self,
-        ])
-        let configuration = ModelConfiguration(
-            schema: schema,
-            isStoredInMemoryOnly: false
-        )
-        do {
-            let container = try ModelContainer(
-                for: schema,
-                configurations: configuration
-            )
-            return ModelContext(container)
-        } catch {
-            fatalError("Failed to create ModelContext: \(error)")
-        }
-    }()
     
     lazy var measurementRepository: MeasurementRepository = {
         MeasurementRepository(context: modelContext)
@@ -57,5 +39,14 @@ final class DependencyContainer: ObservableObject {
     
     func makeMeasurementPointListViewModel() -> MeasurementPointListViewModel {
         MeasurementPointListViewModel(repository: measurementPointRepository, measurementRepository: measurementRepository)
+    }
+}
+
+extension DependencyContainer {
+    static func preview() -> DependencyContainer {
+        let schema = Schema([MeasurementPoint.self, Measurement.self])
+        let config = ModelConfiguration(schema: schema, isStoredInMemoryOnly: true)
+        let mc = try! ModelContainer(for: schema, configurations: [config])
+        return DependencyContainer(modelContext: ModelContext(mc))
     }
 }

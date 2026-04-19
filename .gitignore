@@ -1,3 +1,6 @@
 *.xcuserdata
 UserInterfaceState.xcuserstate
 xcuserdata/
+.agents/
+.claude/
+skills-lock.json

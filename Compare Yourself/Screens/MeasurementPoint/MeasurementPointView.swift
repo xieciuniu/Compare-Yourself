@@ -47,6 +47,7 @@ struct MeasurementPointView: View {
                 }
             }
         }
+        .toolbar(.hidden, for: .tabBar)
         .sheet(isPresented: $vm.showingAddPoint) {
             vm.fetchMeasurements(mpId: mp.pointId)
         } content: {
@@ -71,7 +72,7 @@ struct MeasurementPointView: View {
 }
 
 #Preview {
-    let container = DependencyContainer()
+    let container = DependencyContainer.preview()
     let mp = MeasurementPoint(name: "Belly", measurementUnit: .length)
     
     
